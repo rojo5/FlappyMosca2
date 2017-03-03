@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.Timer;
 
@@ -19,6 +20,7 @@ import javax.swing.Timer;
  */
 public class VentanaJuego extends javax.swing.JFrame {
     
+    Pajaro miPajaro = new Pajaro(30, Color.WHITE);
 
     static int ANCHOPANTALLA = 800;
     static int ALTOPANTALLA = 750;
@@ -40,15 +42,27 @@ public class VentanaJuego extends javax.swing.JFrame {
      */
     public VentanaJuego() {
         initComponents();
-
+        inicializaBuffers();
+        temporizador.start();
+        
     }
     
     private void inicializaBuffers(){
-
+        lienzoGraphics = (Graphics2D) jPanel1.getGraphics();
+        buffer = (BufferedImage) jPanel1.createImage(ANCHOPANTALLA, ALTOPANTALLA);
+        bufferGraphics = buffer.createGraphics();
+        
+        bufferGraphics.setColor(Color.BLACK);
+        bufferGraphics.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA);
     }
     
     private void bucleDelJuego(){
-
+        //limpio la pantalla
+        bufferGraphics.setColor(Color.BLACK);
+        bufferGraphics.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA); 
+        //dibujo el pájaro en su nueva posición
+        miPajaro.mueve(bufferGraphics);
+        lienzoGraphics.drawImage(buffer, 0,0, null);
     }
     
     /**
@@ -73,7 +87,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 635, Short.MAX_VALUE)
+            .addGap(0, 615, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,7 +98,10 @@ public class VentanaJuego extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +112,9 @@ public class VentanaJuego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        
+       if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+           miPajaro.yVelocidad += 8;
+       }
     }//GEN-LAST:event_formKeyPressed
 
     /**
