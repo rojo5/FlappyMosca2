@@ -22,14 +22,14 @@ public class VentanaJuego extends javax.swing.JFrame {
     
     Pajaro miPajaro = new Pajaro(30, Color.WHITE);
 
-    static int ANCHOPANTALLA = 800;
+    static int ANCHOPANTALLA = 400;
     static int ALTOPANTALLA = 750;
     static int SEPARACION_COLUMNAS = 150;
     
-    Columna miColumna1 = new Columna(ANCHOPANTALLA );
-    Columna miColumna2 = new Columna(ANCHOPANTALLA + SEPARACION_COLUMNAS);
-    Columna miColumna3 = new Columna(ANCHOPANTALLA + 2*SEPARACION_COLUMNAS);
-    Columna miColumna4 = new Columna(ANCHOPANTALLA + 3*SEPARACION_COLUMNAS);
+    Columna miColumna1 = new Columna(ANCHOPANTALLA , ANCHOPANTALLA);
+    Columna miColumna2 = new Columna(ANCHOPANTALLA + SEPARACION_COLUMNAS, ANCHOPANTALLA);
+    Columna miColumna3 = new Columna(ANCHOPANTALLA + 2*SEPARACION_COLUMNAS, ANCHOPANTALLA);
+    //Columna miColumna4 = new Columna(ANCHOPANTALLA + 3*SEPARACION_COLUMNAS, ANCHOPANTALLA);
     
     BufferedImage buffer = null;
     Graphics2D bufferGraphics, lienzoGraphics = null;
@@ -71,7 +71,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         miColumna1.mueve(bufferGraphics);
         miColumna2.mueve(bufferGraphics);
         miColumna3.mueve(bufferGraphics);
-        miColumna4.mueve(bufferGraphics);
+        //miColumna4.mueve(bufferGraphics);
         
         lienzoGraphics.drawImage(buffer, 0,0, null);
     }
