@@ -36,5 +36,9 @@ public class Pajaro extends Ellipse2D.Double{
             yVelocidad = -2;
         }
     }
+    
+    public boolean chequeaColision(Columna c){
+        return (this.intersects(c.capitel) || this.intersects(c.base));
+    }
 
 }

@@ -37,8 +37,8 @@ public class Columna {
     
     
     public void mueve(Graphics2D g2){
-        mueveColumna(capitel);
-        mueveColumna(base);
+        mueveColumna();
+        //mueveColumna(base);
 
         g2.setColor(Color.BLUE);
         g2.fill(capitel);
@@ -46,12 +46,22 @@ public class Columna {
 
     }
     
-    private void mueveColumna(Rectangle2D r){
-        if (r.getX() + ancho_columna < 0){
-            r.setFrame(ancho_pantalla, r.getY(),r.getWidth(), r.getHeight());
+    private void mueveColumna(){
+        if (capitel.getX() + ancho_columna < 0){
+            Random aleatorio = new Random();
+            int desplazamiento = aleatorio.nextInt(300);
+            capitel.setFrame(ancho_pantalla, 
+                            -desplazamiento,
+                            capitel.getWidth(), 
+                            capitel.getHeight());
+            base.setFrame(ancho_pantalla, 
+                            altura_columna + hueco - desplazamiento,
+                            base.getWidth(), 
+                            base.getHeight());
         }
         else{
-            r.setFrame(r.getX()-1, r.getY(),r.getWidth(), r.getHeight());
+            capitel.setFrame(capitel.getX()-1, capitel.getY(),capitel.getWidth(), capitel.getHeight());
+            base.setFrame(base.getX()-1, base.getY(),base.getWidth(), base.getHeight());
         }
     }
 }

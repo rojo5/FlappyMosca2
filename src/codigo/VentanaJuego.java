@@ -20,6 +20,8 @@ import javax.swing.Timer;
  */
 public class VentanaJuego extends javax.swing.JFrame {
     
+    boolean gameOver = false;
+    
     Pajaro miPajaro = new Pajaro(30, Color.WHITE);
 
     static int ANCHOPANTALLA = 400;
@@ -63,6 +65,10 @@ public class VentanaJuego extends javax.swing.JFrame {
     }
     
     private void bucleDelJuego(){
+        if (miPajaro.chequeaColision(miColumna1)){temporizador.stop();}
+        if (miPajaro.chequeaColision(miColumna2)){temporizador.stop();}
+        if (miPajaro.chequeaColision(miColumna3)){temporizador.stop();}
+        
         //limpio la pantalla
         bufferGraphics.setColor(Color.BLACK);
         bufferGraphics.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA); 
