@@ -8,10 +8,12 @@ package codigo;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 /**
@@ -34,6 +36,8 @@ public class VentanaJuego extends javax.swing.JFrame {
     //Columna miColumna4 = new Columna(ANCHOPANTALLA + 3*SEPARACION_COLUMNAS, ANCHOPANTALLA);
     
     BufferedImage buffer = null;
+
+    
     Graphics2D bufferGraphics, lienzoGraphics = null;
     
     int contador = 0;
@@ -54,6 +58,8 @@ public class VentanaJuego extends javax.swing.JFrame {
         temporizador.start();
         
     }
+    
+
     
     private void inicializaBuffers(){
         lienzoGraphics = (Graphics2D) jPanel1.getGraphics();
