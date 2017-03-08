@@ -7,6 +7,7 @@ package codigo;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
 /**
@@ -38,7 +39,18 @@ public class Pajaro extends Ellipse2D.Double{
     }
     
     public boolean chequeaColision(Columna c){
-        return (this.intersects(c.capitel) || this.intersects(c.base));
+        Area areaPajaro = new Area(this);
+        Area areaCirculo = new Area(c.circuloInferior);
+        boolean choca = true;
+        areaPajaro.intersect(areaCirculo);
+       
+        if (areaPajaro.isEmpty()){
+            choca = false;
+        }
+        return (areaPajaro.intersects(c.capitel) || 
+                areaPajaro.intersects(c.base) ||
+                choca
+                );
     }
 
 }
