@@ -39,17 +39,30 @@ public class Pajaro extends Ellipse2D.Double{
     }
     
     public boolean chequeaColision(Columna c){
+       
         Area areaPajaro = new Area(this);
         Area areaCirculo = new Area(c.circuloInferior);
-        boolean choca = true;
+        Area areaCirculo2 = new Area(c.circuloSuperior);
+        
+        boolean choca = true, choca2 = true;
+        
+        //chequeo el choque con el segundo pajaro
         areaPajaro.intersect(areaCirculo);
        
         if (areaPajaro.isEmpty()){
             choca = false;
         }
-        return (areaPajaro.intersects(c.capitel) || 
-                areaPajaro.intersects(c.base) ||
-                choca
+        
+        //chequeo el choque con el segundo pajaro
+        areaPajaro = new Area(this);
+        areaPajaro.intersect(areaCirculo2);
+        if (areaPajaro.isEmpty()){
+            choca2 = false;
+        }
+        
+        return (this.intersects(c.capitel) || 
+                this.intersects(c.base) ||
+                choca || choca2
                 );
     }
 

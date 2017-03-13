@@ -21,7 +21,7 @@ import javax.swing.ImageIcon;
 public class Columna {
     
     Rectangle2D capitel, base;
-    Ellipse2D circuloInferior;
+    Ellipse2D circuloInferior, circuloSuperior;
     int hueco = 80;
     int altura_columna = 500;
     int ancho_columna = 79;
@@ -31,13 +31,21 @@ public class Columna {
     public Columna (int _ancho, int _anchoPantalla){
         Random aleatorio = new Random();
         int desplazamiento = aleatorio.nextInt(300);
-        capitel = new Rectangle2D.Double(_ancho, -desplazamiento, ancho_columna, altura_columna);
+        capitel = new Rectangle2D.Double(_ancho, 
+                                        -desplazamiento - ancho_columna/2, 
+                                        ancho_columna, 
+                                        altura_columna);
         base = new Rectangle2D.Double(_ancho, 
                                       altura_columna + hueco - desplazamiento + ancho_columna/2, 
                                       ancho_columna, 
                                       altura_columna);
         circuloInferior = new Ellipse2D.Double(_ancho,
                                                 altura_columna + hueco - desplazamiento,
+                                                ancho_columna,
+                                                ancho_columna
+                                                    );
+        circuloSuperior = new Ellipse2D.Double(_ancho,
+                                                altura_columna - desplazamiento - hueco ,
                                                 ancho_columna,
                                                 ancho_columna
                                                     );
@@ -70,7 +78,9 @@ public class Columna {
         g2.drawImage(col_abajo, (int)base.getX(), (int)base.getY()-ancho_columna/2, null);
         g2.drawImage(col_arriba, (int)capitel.getX(), (int)capitel.getY()-ancho_columna/2, null);
         g2.fill(circuloInferior);
+        g2.fill(circuloSuperior);
         g2.setColor(Color.PINK);
+        g2.fill(capitel);
         g2.fill(base);
     }
     
@@ -79,7 +89,7 @@ public class Columna {
             Random aleatorio = new Random();
             int desplazamiento = aleatorio.nextInt(300);
             capitel.setFrame(ancho_pantalla, 
-                            -desplazamiento,
+                            -desplazamiento - ancho_columna/2,
                             capitel.getWidth(), 
                             capitel.getHeight());
             base.setFrame(ancho_pantalla, 
@@ -91,11 +101,17 @@ public class Columna {
                                         ancho_columna,
                                         ancho_columna
                                             );
+            circuloSuperior.setFrame(ancho_pantalla, 
+                                        altura_columna - desplazamiento - hueco ,
+                                        ancho_columna,
+                                        ancho_columna
+                                            );
         }
         else{
             capitel.setFrame(capitel.getX()-1, capitel.getY(),capitel.getWidth(), capitel.getHeight());
             base.setFrame(base.getX()-1, base.getY(),base.getWidth(), base.getHeight());
             circuloInferior.setFrame(circuloInferior.getX()-1, circuloInferior.getY(),circuloInferior.getWidth(), circuloInferior.getHeight());
+            circuloSuperior.setFrame(circuloSuperior.getX()-1, circuloSuperior.getY(),circuloSuperior.getWidth(), circuloSuperior.getHeight());
         }
     }
 }
