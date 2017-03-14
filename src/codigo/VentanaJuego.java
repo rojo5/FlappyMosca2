@@ -34,6 +34,8 @@ public class VentanaJuego extends javax.swing.JFrame {
     Columna miColumna2 = new Columna(ANCHOPANTALLA + SEPARACION_COLUMNAS, ANCHOPANTALLA);
     Columna miColumna3 = new Columna(ANCHOPANTALLA + 2*SEPARACION_COLUMNAS, ANCHOPANTALLA);
     //Columna miColumna4 = new Columna(ANCHOPANTALLA + 3*SEPARACION_COLUMNAS, ANCHOPANTALLA);
+    Suelo miSuelo= new Suelo(0, ALTOPANTALLA*0.60);
+    Suelo miSuelo2= new Suelo(miSuelo.getWidth(), ALTOPANTALLA*0.60);
     
     BufferedImage buffer = null;
 
@@ -83,7 +85,10 @@ public class VentanaJuego extends javax.swing.JFrame {
         miColumna1.mueve(bufferGraphics);
         miColumna2.mueve(bufferGraphics);
         miColumna3.mueve(bufferGraphics);
+        miSuelo.mueve(bufferGraphics);
+        miSuelo2.mueve(bufferGraphics);
         //miColumna4.mueve(bufferGraphics);
+        
         
         lienzoGraphics.drawImage(buffer, 0,0, null);
     }
